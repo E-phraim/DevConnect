@@ -55,7 +55,9 @@ router.post(
 
       // Encrypt password
       const salt = await bcrypt.genSalt(10);
+
       user.password = await bcrypt.hash(password, salt);
+
       await user.save();
 
       //return jsonwebtoken
@@ -73,8 +75,6 @@ router.post(
           res.json({ token });
         }
       );
-
-      res.send("User Registered");
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");
